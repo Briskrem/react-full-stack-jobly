@@ -1,0 +1,19 @@
+form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 33rem;
+    border: .5px solid gray;
+    padding: 2rem;
+}
+.SignUp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
+button{
+    width: 3rem;
+    height: 2rem;
+}

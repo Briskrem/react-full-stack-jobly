@@ -1,0 +1,59 @@
+.Item{
+    width: auto;
+    height: 13rem;
+    box-shadow: 0 0 15px black;
+    margin: 2rem;
+    border-radius: 10px;
+    display: flex;
+     
+    align-items: center;
+    justify-content:  space-between;
+    padding-left: 2rem;
+    transition: .2s ease-in;
+}
+.Item:hover{
+    transform: scale(1.01);
+}
+.Item > div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    height: 7rem;
+    flex-basis: 50rem;
+    
+    text-align: left;
+    
+    
+}
+p{
+    margin-bottom: 1rem;
+    align-items:flex-start ;
+}
+p:nth-of-type(1){
+    font-weight: bold;
+    color: green;
+}
+
+.Item > img{
+    height: 2rem;
+    width: 2rem;
+    margin-right: 2rem;
+    outline: none;
+    border: none;
+}
+
+.Item-jobs{
+    width: auto;
+    height: 10rem;
+    box-shadow: 0 0 15px black;
+    margin: 2rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content:  center;
+  
+    transition: .2s ease-in;
+}
+
