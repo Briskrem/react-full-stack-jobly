@@ -1,25 +1,21 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import dataContext from "CreateContext"
+import dataContext from "./CreateContext"
 import './Navbar.css'
 
 export const Navbar = () => {
-    const { currentUser } = useContext(dataContext);
+    const { currentUser , logout} = useContext(dataContext);
     return (
         <div className="Navbar">
-                {currentUser? <NavLink to={'/companies'}>Companies</NavLink> : null }
-                <NavLink to={'/'}>Jobly</NavLink>
-                
-                <NavLink to={'/jobs'} >Jobs</NavLink>
-                <NavLink to={'/profile'} >Profile</NavLink>
-                <NavLink to={'/login'} >Login</NavLink>
-                <NavLink to={'/sign-up'} >Sign Up</NavLink>
-            
+            <NavLink to={'/'}>Jobly</NavLink>
+            {currentUser? <NavLink to={'/jobs'} >Jobs</NavLink> : null }
+            {currentUser? <NavLink to={'/profile'} >Profile</NavLink>: null }
+            {currentUser? <NavLink to={'/companies'}>Companies</NavLink> : null }
+            {currentUser? <NavLink to={'/'} onClick={logout}>Logout {currentUser.first_name || currentUser.username}</NavLink> : null }
+            {currentUser? null : <NavLink to={'/login'}>Login</NavLink> }
+            {currentUser? null : <NavLink to={'/sign-up'}>Sign Up</NavLink> }
         </div>
     )
 }
 
 
-// <NavLink>Login</NavLink>
-//                 <NavLink>Sign Up</NavLink>
-//                 <NavLink>Logout</NavLink>

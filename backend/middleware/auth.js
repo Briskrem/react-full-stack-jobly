@@ -12,18 +12,18 @@ const { UnauthorizedError } = require("../expressError");
  * If a token was provided, verify it, and, if valid, store the token payload
  * on res.locals (this will include the username and isAdmin field.)
  *
- * It's not an error if no token was provided or if the token is not valid.
+ * It's not an error if no token was povided or if the token is not valid.
  */
 
 function authenticateJWT(req, res, next) {
-  console.log(';inside authenticate')
-  console.log(req.headers)
+  // console.log(';inside authenticate'.red)
+  // console.log(req.headers)
   try {
     const authHeader = req.headers && req.headers.authorization;
     if (authHeader) {
       const token = authHeader.replace(/^[Bb]earer /, "").trim();
       res.locals.user = jwt.verify(token, SECRET_KEY);
-      console.log(res.locals.user, 'res.locals.user'.yellow)
+      // console.log(res.locals.user, 'res.locals.user@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ß'.yellow)
     }
     return next();
   } catch (err) {

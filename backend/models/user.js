@@ -70,7 +70,7 @@ class User {
     }
 
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
-    console.log('inside register model.green')
+    console.log('inside register model'.green)
     const result = await db.query(
           `INSERT INTO users
            (username,

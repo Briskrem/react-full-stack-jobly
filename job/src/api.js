@@ -27,6 +27,7 @@ class JoblyApi {
         : {};
     // console.log(url, method, data, params, 'params')
     // why .data??????????????????????????????????????????????????????????????????
+    console.log(params, params.name, '%%%%%%%%%%%%%%%%%%%%%%')
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
@@ -61,8 +62,23 @@ class JoblyApi {
 }
 
 // for now, put token ("testuser" / "password" on class)
-JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+JoblyApi.token = ''
+
+
+// JoblyApi  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+//     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+//     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
 export default JoblyApi;
+
+//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImIiLCJ
+//pc0FkbWluIjpmYWxzZSwiaWF0IjoxNjYxNjk3Mjk4fQ.Fd1FccRQE6-jWqnkuRSXOzV0Rsu90dwbIpP8cnvREkM"
+
+//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImIiLCJpc0FkbWluIjpmYWxzZSwiaWF0I
+//joxNjYxNjk3Mjk4fQ.Fd1FccRQE6-jWqnkuRSXOzV0Rsu90dwbIpP8cnvREkM"
+
+//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImEiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjYxNjk4MDQ5fQ.El_zxpQxow4TBzVQ5OiqGFS26kRDDpQcJyH12mXdPyc"
+
+//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImIiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjYxNjk4MDc5fQ.2lv9PsmR5Eidq3y1DTBA8BfJfiVSOo1d9AGgyetJUgs"
+
+//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImEiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjYxNjk4MTMwfQ.mh_fazfOoQoxA1-35lvJ8o0vSUdLX9N_81tAV_pQvyQ"

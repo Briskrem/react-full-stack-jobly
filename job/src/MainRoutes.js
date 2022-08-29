@@ -10,25 +10,64 @@ import { Home} from './Home'
 import {Login} from './Login'
 import {SignUp} from './SignUp'
 import JoblyApi from './api'
+import jwt from "jsonwebtoken";
+import useLocalStorage from "./useLocalStorage";
+
 
 export const MainRoutes = () => {
 
     const [comp, setComp] = useState([])
     const [job, setJob] = useState([])
+    const [currentUser, setCurrentUser] = useState(null);
+    const [token, setToken] = useLocalStorage(null);
+
+    useEffect(function loadUserInfo() {
+        async function getCurrentUser() {      
+          if (token) {
+            try {
+                console.log(token, 'lulululu')
+              let { username } = jwt.decode(token.token);
+              // put the token on the Api class so it can use it to call the API.
+              JoblyApi.token = token.token;
+              let currentUser = await JoblyApi.request(`users/${username}`);
+            //   console.log(currentUser, 'currentusers')
+              setCurrentUser(currentUser.user);
+            //   setApplicationIds(new Set(currentUser.applications));
+            } catch (err) {
+              console.error("App loadUserInfo: problem loading", err);
+              setCurrentUser(null);
+            }
+          }
+        //   setInfoLoaded(true);
+        }
+        // setInfoLoaded(false);
+        getCurrentUser();
+      }, [token]);
 
     useEffect(()=>{
         async function getComp(){
-            // const req = await JoblyApi.request('companies')
-            // setCompAndJob(req.companies)
             await Promise.all([JoblyApi.request('companies'), JoblyApi.request('jobs')])
             .then(data => {
                 setComp(data[0])
                 setJob(data[1])
             })
-            
         }
         getComp()
     },[])
+
+    async function loginUser(data) {
+        console.log(data, 'logindata')
+        try {
+          let token = await JoblyApi.request(`auth/token`, data, "post");
+          console.log(token, 'tokennnnnnnnnnnnnnnnn')
+          setToken(token);
+          return { success: true };
+        } catch (errors) {
+          console.error("login failed", errors);
+          return { success: false, errors };
+        }
+    }
+    
 
     const getCompDetails = async (handle) => {
         const req = await JoblyApi.request(`companies/${handle}`)
@@ -47,36 +86,24 @@ export const MainRoutes = () => {
     }
 
     const registerUser = async ({username, password, firstName, lastName, email}) => {
-        console.log('inside registerUser')
-        window.localStorage.setItem('token', JoblyApi.token)
-        const req = await JoblyApi.request('auth/register', {username, password, firstName, lastName, email}, 'post')
-        console.log(req)
+        // window.localStorage.setItem('token', JoblyApi.token)
+        const token = await JoblyApi.request('auth/register', {username, password, firstName, lastName, email}, 'post')
+        setToken(token);
+        return { success: true };
     }
 
-    const login = async (data) => {
-        let res = await this.request(`auth/token`, data, "post");
-        return res.token;
+    function logout() {
+        setCurrentUser(null);
+        setToken(null);
       }
 
     let companies = comp?.companies
     let jobies = job?.jobs
-    // console.log(jobies, ';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;')
-   
-    // console.log(compAndJob[0])
-    // console.log(compAndJob[0])
-    // console.log(compAndJob[1])
-    
-    // let companies = compAndJob[0]
-
-    // let x = compAndJob[0]? compAndJob[0]['companies'] : null;
-    // let company = compAndJob[0]?.companies;
-    console.log(companies)
-
 
     return (
         <div>
           <BrowserRouter>
-            <dataContext.Provider value={{companies, getCompDetails, jobies, getCompCallBack, getJobCallBack, registerUser}}>
+            <dataContext.Provider value={{companies, getCompDetails, jobies, getCompCallBack, getJobCallBack, registerUser, currentUser, loginUser, logout}}>
             <Navbar />
             <Routes>
                 <Route path={'/'} element={<Home />}  /> 

@@ -1,11 +1,13 @@
 import { useState, useContext } from 'react'
 import dataContext from './CreateContext'
-
+import { useNavigate } from 'react-router-dom'
 
 import './SignUp.css'
 
 
 export const SignUp = () => {
+
+    const navigate = useNavigate()
 
     let initial = { username: '', password: '', firstName: '', lastName:'', email:''}
     const [data, setData] = useState(initial)
@@ -19,10 +21,18 @@ export const SignUp = () => {
         }))
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
-        registerUser(data)
+        let result = await registerUser(data)
+        console.log(result)
+        if (result.success) {
+            navigate("/companies");
+        }
     }
+   
+    
+
+
 
     return (
         <div className='SignUp'>

@@ -63,7 +63,7 @@ class Company {
                  FROM companies`;
     let whereExpressions = [];
     let queryValues = [];
-
+ 
     const { minEmployees, maxEmployees, name } = searchFilters;
 
     if (minEmployees > maxEmployees) {
@@ -95,7 +95,7 @@ class Company {
     // Finalize query and return results
 
     query += " ORDER BY name";
-    console.log(query, 'company ln 89')
+    console.log(query, 'vvv'.yellow, queryValues, 'company ln 89')
     const companiesRes = await db.query(query, queryValues);
     return companiesRes.rows;
   }

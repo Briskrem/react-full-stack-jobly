@@ -21,13 +21,12 @@ export const CompanyDetails = () => {
    
     // console.log(state.company)
     // let newState = state.company
-  
+
     // no need for local because local does not provide all of the info esp jobs property of company
     // const location = useLocation()
     // console.log(location.state)
     // const itemData = location.state?.obj
     // console.log(itemData, 'link state')
-
     return (
         <div>
             FLYY
